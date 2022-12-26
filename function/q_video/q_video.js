@@ -8,7 +8,7 @@
 const $ = new Env('腾讯视频会员签到');
 const notify = $.isNode() ? require('../sendNotify') : '';
 let ref_url = ''
-let _cookie = process.env.V_COOKIE
+let _cookie = 'iip=0; pgv_pvid=7694131803; tvfe_boss_uuid=c0741ed6cbe5478e; video_platform=2; eas_sid=y1o6e6q0J5K4i4N4q9j417o0D7; LW_uid=v1a6W6n0v5x4V5C10511f7R3n7; RK=Ha9xZNUATK; ptcz=e09a751abe932412123e08d6d2ee9aa468e843de2b5e6712bbb9e9af315f8ec6; LW_sid=K1y6M6X045L4v5L2q1g0k9q1l3; uin_cookie=o0760448538; ied_qq=o0760448538; o_cookie=760448538; pac_uid=1_760448538; video_platform=2; pgv_info=ssid=s2427564780; _qpsvr_localtk=0.10188985169817366; ptui_loginuin=315808225; main_login=qq; vqq_access_token=48DBA078D06F84E13CD8B7A1A725EA88; vqq_appid=101483052; vqq_openid=97B3660797C9A5F7A4E29D6AF8AE4195; vqq_vuserid=943983936; vqq_vusession=8RmAxJ7Yxr-luDXgfrliYw.N; vqq_refresh_token=0E09B280FAA08B390102C8F0B8DD06AA; login_time_init=2022-12-26 11:10:4; video_guid=6844b0e2784e689d; vqq_next_refresh_time=6596; vqq_login_time_init=1672024205; login_time_last=2022-12-26 11:10:8'
 const SEND_KEY = process.env.SEND_KEY
 const auth = getAuth()
 const axios = require('axios')
@@ -23,6 +23,7 @@ let headers = {
 /**
  * @description 拼接REF_URL
  */
+process.env.V_REF_URL = 'https://access.video.qq.com/user/auth_refresh?vappid=11059694&vsecret=fdf61a6be0aad57132bc5cdf78ac30145b6cd2c1470b0cfe&type=qq&g_tk=&g_vstk=2098001187&g_actk=1935410555&raw=1'
 if (process.env.V_REF_URL) {
     if (process.env.V_REF_URL.indexOf('https://access.video.qq.com/user/auth_refresh') > -1) {
         ref_url = process.env.V_REF_URL

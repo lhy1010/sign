@@ -27,13 +27,13 @@ let BARK_SOUND = '';
 // =======================================telegram机器人通知设置区域===========================================
 //此处填你telegram bot 的Token，telegram机器人通知推送必填项.例如：1077xxx4424:AAFjv0FcqxxxxxxgEMGfi22B4yh15R5uw
 //(环境变量名 TG_BOT_TOKEN)
-let TG_BOT_TOKEN = '';
+let TG_BOT_TOKEN = '5595298806:AAH_ymw2UdwoJ_Wcmn1VvxLl3KA869M_24Y';
 //此处填你接收通知消息的telegram用户的id，telegram机器人通知推送必填项.例如：129xxx206
 //(环境变量名 TG_USER_ID)
-let TG_USER_ID = '';
+let TG_USER_ID = '5139329317';
 //tg推送HTTP代理设置(不懂可忽略,telegram机器人通知推送功能中非必填)
-let TG_PROXY_HOST = ''; //例如:127.0.0.1(环境变量名:TG_PROXY_HOST)
-let TG_PROXY_PORT = ''; //例如:1080(环境变量名:TG_PROXY_PORT)
+let TG_PROXY_HOST = '127.0.0.1'; //例如:127.0.0.1(环境变量名:TG_PROXY_HOST)
+let TG_PROXY_PORT = '11223'; //例如:1080(环境变量名:TG_PROXY_PORT)
 let TG_PROXY_AUTH = ''; //tg代理配置认证参数
 //Telegram api自建的反向代理地址(不懂可忽略,telegram机器人通知推送功能中非必填),默认tg官方api(环境变量名:TG_API_HOST)
 let TG_API_HOST = 'api.telegram.org';
@@ -345,6 +345,8 @@ function BarkNotify(text, desp, params = {}) {
 
 function tgBotNotify(text, desp) {
   return new Promise((resolve) => {
+    // 代理服务器ip和端口,由快代理提供
+
     if (TG_BOT_TOKEN && TG_USER_ID) {
       const options = {
         url: `https://${TG_API_HOST}/bot${TG_BOT_TOKEN}/sendMessage`,
@@ -354,6 +356,7 @@ function tgBotNotify(text, desp) {
         },
         timeout,
       };
+      
       if (TG_PROXY_HOST && TG_PROXY_PORT) {
         const tunnel = require('tunnel');
         const agent = {
@@ -375,7 +378,7 @@ function tgBotNotify(text, desp) {
           } else {
             data = JSON.parse(data);
             if (data.ok) {
-              console.log('Telegram发送通知消息成功ߎ飀✮');
+              console.log('Telegram发送通知消息成功');
             } else if (data.error_code === 400) {
               console.log(
                 '请主动给bot发送一条消息并检查接收用户ID是否正确。\n',
